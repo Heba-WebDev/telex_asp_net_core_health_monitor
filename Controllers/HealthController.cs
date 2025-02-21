@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("/health-check")] 
 public class HealthCheck : ControllerBase
 {
 
