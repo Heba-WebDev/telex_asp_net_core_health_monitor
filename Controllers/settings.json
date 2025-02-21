@@ -23,7 +23,7 @@
           "label": "interval",
           "type": "text",
           "required": true,
-          "default": "*/2 * * * *"
+          "default": "* * * * *"
         }
       ],
       "target_url": "",
