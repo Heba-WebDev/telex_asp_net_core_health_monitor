@@ -9,11 +9,13 @@ public class TickController : ControllerBase
 {
     private readonly IWebhookService _service;
     private readonly HealthCheckService _healthCheckService;
+    private readonly IConfiguration _configuraitons;
 
-    public TickController(IWebhookService service, HealthCheckService healthCheckService)
+    public TickController(IWebhookService service, HealthCheckService healthCheckService, IConfiguration configurations)
     {
         _service = service;
         _healthCheckService = healthCheckService;
+        _configuraitons = configurations;
     }
 
     [HttpPost]
@@ -28,6 +30,9 @@ public class TickController : ControllerBase
         {
             return BadRequest("Return URL and Channel Id are required.");
         }
+
+        var id = _configuraitons["Channel_ID"];
+        if (!payload.ChannelId.Equals(id)) return BadRequest("Invalid channel id");
 
         var healthReport = await _healthCheckService.CheckHealthAsync();
 
